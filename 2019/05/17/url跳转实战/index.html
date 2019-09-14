@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web漏洞," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言最近在一些厂商项目中开始接触到一些url任意重定向，虽然是低危，奖金较低，（虽然国外已经是几百$）但是一旦找到突破点，几乎整个站的url跳转都可以bypass，一个厂商所有点的url跳转加起来奖金也比较可观，所以将自己挖掘过程中一点点心得分享一下。 简介先走个流程说些废话，url重定向漏洞也称url任意跳转漏洞，网站信任了用户的输入导致恶意攻击，url重定向主要用来钓鱼，比如url跳转中最常见">
+<meta name="keywords" content="web漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透之url跳转">
+<meta property="og:url" content="http://yoursite.com/2019/05/17/url跳转实战/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="前言最近在一些厂商项目中开始接触到一些url任意重定向，虽然是低危，奖金较低，（虽然国外已经是几百$）但是一旦找到突破点，几乎整个站的url跳转都可以bypass，一个厂商所有点的url跳转加起来奖金也比较可观，所以将自己挖掘过程中一点点心得分享一下。 简介先走个流程说些废话，url重定向漏洞也称url任意跳转漏洞，网站信任了用户的输入导致恶意攻击，url重定向主要用来钓鱼，比如url跳转中最常见">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558097661.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558098332.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558098367.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558101310.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558101163.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558101492.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558102061.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558102491.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558102982.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558103200.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558103809.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558155397.jpg">
+<meta property="og:image" content="http://47.106.185.69/1/./img/1558155773.jpg">
+<meta property="og:updated_time" content="2019-05-18T05:33:14.930Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="渗透之url跳转">
+<meta name="twitter:description" content="前言最近在一些厂商项目中开始接触到一些url任意重定向，虽然是低危，奖金较低，（虽然国外已经是几百$）但是一旦找到突破点，几乎整个站的url跳转都可以bypass，一个厂商所有点的url跳转加起来奖金也比较可观，所以将自己挖掘过程中一点点心得分享一下。 简介先走个流程说些废话，url重定向漏洞也称url任意跳转漏洞，网站信任了用户的输入导致恶意攻击，url重定向主要用来钓鱼，比如url跳转中最常见">
+<meta name="twitter:image" content="http://47.106.185.69/1/./img/1558097661.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/17/url跳转实战/"/>
+
+
+
+
+
+  <title>渗透之url跳转 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/17/url跳转实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">渗透之url跳转</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-17T00:00:00+08:00">
+                2019-05-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在一些厂商项目中开始接触到一些url任意重定向，虽然是低危，奖金较低，（虽然国外已经是几百$）但是一旦找到突破点，几乎整个站的url跳转都可以bypass，一个厂商所有点的url跳转加起来奖金也比较可观，所以将自己挖掘过程中一点点心得分享一下。</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>先走个流程说些废话，url重定向漏洞也称url任意跳转漏洞，网站信任了用户的输入导致恶意攻击，url重定向主要用来钓鱼，比如url跳转中最常见的跳转在登陆口，支付口，也就是一旦登陆将会跳转任意自己构造的网站，如果设置成自己的url则会造成钓鱼，浅析危害。</p>
+<pre><code>&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;
+&lt;form method=&quot;get&quot; action=&quot;url.php&quot;&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+username:
+&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+&lt;br&gt;&lt;br&gt;
+password:
+&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;
+&lt;input type=&quot;submit&quot; value=&quot;登陆&quot; name=&quot;password&quot;&gt;
+&lt;/form&gt;
+
+&lt;?php
+
+$url=$_GET[&apos;redict&apos;];
+echo $_GET[&apos;username&apos;];
+if ($_GET[&apos;username&apos;]&amp;&amp;$_GET[&apos;password&apos;]) {
+
+    header(&quot;Location:$url&quot;);exit;
+}
+
+?&gt;
+</code></pre><p><img src="http://47.106.185.69/1/./img/1558097661.jpg" alt=""></p>
+<p>最简单的代码实例，也是很贴近真实渗透的案例，登陆跳转，后面通常是加上自己业务的url，一旦存在url任意重定向，发送给用户，会毫不疑问的输入账号密码登陆，然后跳转到我们想要他跳转的url，比如：</p>
+<p>我们发送给用户这样的url，</p>
+<pre><code>http://127.0.0.1/url.php?username=&amp;password=&amp;redict=http://127.0.0.1/fish.php
+</code></pre><p>用户正常输入账号密码登陆点击登陆。跳转到构造的页面。(我可真是个钓鱼鬼才)</p>
+<p><img src="http://47.106.185.69/1/./img/1558098332.jpg" alt=""></p>
+<p><img src="http://47.106.185.69/1/./img/1558098367.jpg" alt=""></p>
+<p>当然钓鱼界面可以伪造一切你想获取的信息。</p>
+<h1 id="bypass"><a href="#bypass" class="headerlink" title="bypass"></a>bypass</h1><p>其实bypass没什么新的套路(我暂时没)，都是网上有的，师傅们可以百度到的，我整理一下，利用上面的代码简单测试，都是本地测试通过的。<a href="http://www.xiaozhupeiqi.com是服务器要求跳转的url。" target="_blank" rel="noopener">www.xiaozhupeiqi.com是服务器要求跳转的url。</a></p>
+<p>1.最常用的一条：@绕过。</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.xiaozhupeiqi.com@www.baidu.com //ssrf也可用
+</code></pre><p>2.绕过一些匹配特定字符。</p>
+<p>？绕过</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.baidu.com?www.xiaozhupeiqi.com
+</code></pre><p>#绕过</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.baidu.com#www.xiaozhupeiqi.com
+</code></pre><p>3.斜杠/绕过</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.baidu.com/www.xiaozhupeiqi.com
+</code></pre><p>或者反斜线</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.baidu.com\www.xiaozhupeiqi.com
+</code></pre><p>4.白名单匹配绕过</p>
+<pre><code>比如匹配规则是必须跳转，xiaozhupeiqi.com 域名下，?#等都不行的时候，如果匹配规则为xiaozhupeiqi.com，可以尝试百度inurl:xiaozhupeiqi.com的域名，比如
+aaaxiaozhupeiqi.com，这样同样可以绕过。接下来实战中会用到，
+</code></pre><p>5.xip.io绕过</p>
+<pre><code>http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=http://www.xiaozhupeiqi.com.220.181.57.217.xip.io
+</code></pre><p>会跳转到百度</p>
+<p>6.理想化方法</p>
+<pre><code>如果有机会在自己的页面设置url跳转，比如目标网站的bbs论坛自己的资料页面设置url跳转，既然是服务器的网站，那么url是不会限制的，可以用一个漏洞去构造另一个漏洞。
+</code></pre><p>7.白名单网站可信</p>
+<pre><code>如果url跳转点信任百度url，google url或者其他，则可以多次跳转达到自己的恶意界面。
+</code></pre><p>8.协议绕过</p>
+<pre><code>http与https协议转换尝试，或者省略
+
+http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=//www.xiaozhupeiqi.com@www.baidu.com
+http://127.0.0.1/url.php?username=1&amp;password=1&amp;password=1&amp;redict=////www.xiaozhupeiqi.com@www.baidu.com//多斜线
+</code></pre><p>9.xss跳转</p>
+<pre><code>这种就没啥说的了，就是XSS造成的跳转，下面也有案例，在有些情况下XSS只能造成跳转的危害。    
+
+&lt;meta  content=&quot;1;url=http://www.baidu.com&quot; http-equiv=&quot;refresh&quot;&gt;
+</code></pre><h1 id="fuzz几个参数"><a href="#fuzz几个参数" class="headerlink" title="fuzz几个参数"></a>fuzz几个参数</h1><pre><code>redirect
+
+url
+
+redirectUrl
+
+callback
+
+return_url
+
+toUrl
+
+ReturnUrl
+
+fromUrl
+
+redUrl
+
+request
+
+redirect_to
+
+redirect_url
+
+jump
+
+jump_to
+
+target
+
+to
+
+link
+
+linkto
+
+domain
+</code></pre><h1 id="实战几个案例"><a href="#实战几个案例" class="headerlink" title="实战几个案例"></a>实战几个案例</h1><p>1.最常见的登陆跳转</p>
+<p>登陆跳转我认为是最常见的跳转类型，几乎百分之七八十网站都会url里设置跳转，所以在登陆的时候建议多观察url参数，通常都会存在跳转至于存不存在漏洞需要自己测试。</p>
+<p>上面的类型四,</p>
+<p>漏洞url ：</p>
+<pre><code>https://xx.xxx.com/User/Login?redirect=http://xxx.com/
+</code></pre><p><img src="http://47.106.185.69/1/./img/1558101310.jpg" alt=""></p>
+<p>为登陆页面，如果登陆成功那么跳转<a href="http://xxx.com/，但是所有方式都无法绕过，但是发现可以跳转aaxxx.com，也就是匹配规则为必须为xxx.com的网址，但是aaxxx.com同样也可以。" target="_blank" rel="noopener">http://xxx.com/，但是所有方式都无法绕过，但是发现可以跳转aaxxx.com，也就是匹配规则为必须为xxx.com的网址，但是aaxxx.com同样也可以。</a></p>
+<p>方法：</p>
+<p>百度 inurl:xxx.com，即可百度到很多域名包含xxx.com的url，即可实现跳转,不小心百度到一个黄域，正好证明危害登陆跳XX网。</p>
+<p><img src="http://47.106.185.69/1/./img/1558101163.jpg" alt=""></p>
+<p>还有一些花里胡哨的base64加码了的跳转，解码就是需要跳转的url,其实本质都一样，</p>
+<p><img src="http://47.106.185.69/1/./img/1558101492.jpg" alt=""></p>
+<p>2.@绕过</p>
+<p>@是最常见的一种绕过。</p>
+<p>漏洞url</p>
+<pre><code>https://xx.xxx.com/user/goToLogin?toUrl=https://xx.xxx.com@www.baidu.com
+</code></pre><p>这种跳转在chrome浏览器可以直接跳转，但是在火狐会弹框询问，但是并不影响它的危害。</p>
+<p>火狐下@的跳转。</p>
+<p><img src="http://47.106.185.69/1/./img/1558102061.jpg" alt=""></p>
+<p>还有一些是跳转目录的，</p>
+<p>如：</p>
+<pre><code>https://xx.xxx.com.cn/?redirect=/user/info.php
+</code></pre><p>修改为</p>
+<pre><code>https://xx.xxx.com.cn/?redirect=@www.baidu.com
+</code></pre><p>这种情况通常@也可以跳转，大胆的去尝试</p>
+<p>3.充值接口跳转</p>
+<p>通常充值接口都会进行跳转，如充值成功会跳转到充值前访问的页面，因为充值接口需要充值才能知道到底存不存在漏洞，所以测试的人相对少一些，大胆去尝试，单车变摩托，充值完成后还可以提现其实并不影响，不嫌麻烦就多测测。这些都是跳转成功的案例。</p>
+<p><img src="http://47.106.185.69/1/./img/1558102491.jpg" alt=""></p>
+<p>4.xss造成的url跳转</p>
+<p>在一次渗透测试中，碰到一个站点，对&lt;&gt;”这些字符都是进行了过滤。且没有其他姿势配合，基本上告别了XSS等漏洞。如下</p>
+<p><img src="http://47.106.185.69/1/./img/1558102982.jpg" alt=""></p>
+<p>可以发现我输入了xsstest&lt;&gt;”，但是&lt;&gt;被直接删除过滤掉了，但是发现双引号还在，先看下源码是怎么处理的。</p>
+<p><img src="http://47.106.185.69/1/./img/1558103200.jpg" alt=""></p>
+<p>乍一看双引号也被转义了，输入的xsstest 搜索有十七处，大部分被实体化了，还有一部分双引号被url编码了，但是此时突然发现我箭头指的一处并未对双引号进行转义或者过滤，虽然&lt;&gt;已经完全被过滤掉了。</p>
+<p>此时构造meta的url跳转。</p>
+<p>payload：</p>
+<pre><code>http://xxx.com/search?w=1;url=http://www.baidu.com&quot; http-equiv=&quot;refresh&amp;fsearch=yes
+</code></pre><p>其中输入</p>
+<pre><code>1;url=http://www.baidu.com&quot; http-equiv=&quot;refresh
+</code></pre><p>最终闭合掉得到的源码为。</p>
+<p><img src="http://47.106.185.69/1/./img/1558103809.jpg" alt=""></p>
+<p>最终点击payload会跳转百度页面，其实这个严格意义上来说算XSS造成的跳转，构造应该也可以XSS。</p>
+<p>5.业务完成后跳转</p>
+<p>这可以归结为一类跳转，比如修改密码，修改完成后跳转登陆页面，绑定银行卡，绑定成功后返回银行卡充值等页面，或者说给定一个链接办理VIP，但是你需要认证身份才能访问这个业务，这个时候通常会给定一个链接，认证之后跳转到刚刚要办理VIP的页面。</p>
+<p>通常这个点都会存在跳转至于存不存在任意跳转，师傅们自测,有些跳转业务不好码就不发了。</p>
+<p><img src="http://47.106.185.69/1/./img/1558155397.jpg" alt=""></p>
+<p>6.用户交互</p>
+<p>在一些用户交互页面也会出现跳转，如请填写对客服评价，评价成功跳转主页，填写问卷，等等业务，注意观察url。</p>
+<p>问卷调查提交跳转。</p>
+<p><img src="http://47.106.185.69/1/./img/1558155773.jpg" alt=""></p>
+<p>ps:如果有其他小技巧我会更新到本篇文章。</p>
+<p>参考：<a href="https://www.anquanke.com/post/id/94377?from=singlemessage" target="_blank" rel="noopener">https://www.anquanke.com/post/id/94377?from=singlemessage</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web漏洞/" rel="tag"># web漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/反序列化学习/" rel="next" title="PHP反序列化学习">
+                <i class="fa fa-chevron-left"></i> PHP反序列化学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/25/thinkphp3.2.3/" rel="prev" title="thinkphp框架学习">
+                thinkphp框架学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bypass"><span class="nav-number">3.</span> <span class="nav-text">bypass</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fuzz几个参数"><span class="nav-number">4.</span> <span class="nav-text">fuzz几个参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战几个案例"><span class="nav-number">5.</span> <span class="nav-text">实战几个案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

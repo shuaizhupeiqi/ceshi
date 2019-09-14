@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="杂," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="端口映射简介百度百科：端口映射是NAT的一种，功能是把在公网的地址转翻译成私有地址， 采用路由方式的ADSL宽带路由器拥有一个动态或固定的公网IP，ADSL直接接在HUB或交换机上，所有的电脑共享上网。 端口映射转发区别转发与映射，按理解意思，是用不同的方法实现同样的目标。 端口转发：你给我了，我打开看看，发现这上面标志显示是要给张三，那么我就给张三去。如果标志是给李四，那我就再给李四去。 端口映">
+<meta name="keywords" content="杂">
+<meta property="og:type" content="article">
+<meta property="og:title" content="端口映射-模拟VPN制作">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/端口映射/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="端口映射简介百度百科：端口映射是NAT的一种，功能是把在公网的地址转翻译成私有地址， 采用路由方式的ADSL宽带路由器拥有一个动态或固定的公网IP，ADSL直接接在HUB或交换机上，所有的电脑共享上网。 端口映射转发区别转发与映射，按理解意思，是用不同的方法实现同样的目标。 端口转发：你给我了，我打开看看，发现这上面标志显示是要给张三，那么我就给张三去。如果标志是给李四，那我就再给李四去。 端口映">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/AeFotL9.png">
+<meta property="og:image" content="http://a1.qpic.cn/psb?/V14K5DCn3C6bNV/a7CmzXwK.VzLn.PLqbiCxupZX2A9JP1ZTImErjpYzVo!/b/dFQBAAAAAAAA&ek=1&kp=1&pt=0&bo=*AEVAgAAAAADF9g!&tl=1&vuin=275640346&tm=1542718800&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="https://i.imgur.com/GQUFxRM.png">
+<meta property="og:image" content="http://a2.qpic.cn/psb?/V14K5DCn3C6bNV/WdG3p4i1GW11StpHM5bXD2iBwfvG.vKyQ*LKv1yfKdI!/b/dDEBAAAAAAAA&ek=1&kp=1&pt=0&bo=kAJEAQAAAAADJ9U!&tl=1&vuin=275640346&tm=1542718800&sce=60-2-2&rf=viewer_4">
+<meta property="og:image" content="http://m.qpic.cn/psb?/V14K5DCn3C6bNV/GTh0remJT0I9c8pOWtfKZd9h*i8O9Rh*Ga3fx**WDmw!/b/dDYBAAAAAAAA&bo=ZAROAQAAAAADBw0!&rf=viewer_4">
+<meta property="og:image" content="https://i.imgur.com/LdlCmCJ.png">
+<meta property="og:image" content="https://i.imgur.com/KDkfcmW.png">
+<meta property="og:image" content="https://i.imgur.com/8iBLnWK.png">
+<meta property="og:image" content="https://i.imgur.com/rO0dudJ.png">
+<meta property="og:image" content="https://i.imgur.com/aOF4pLm.png">
+<meta property="og:image" content="https://i.imgur.com/EOJ4wuA.png">
+<meta property="og:image" content="https://i.imgur.com/LwrLisM.png">
+<meta property="og:image" content="https://i.imgur.com/7F4R3mg.png">
+<meta property="og:image" content="https://i.imgur.com/BbcqoB2.png">
+<meta property="og:image" content="https://i.imgur.com/qEMogZh.png">
+<meta property="og:image" content="https://i.imgur.com/xYT2eMJ.png">
+<meta property="og:updated_time" content="2018-11-25T11:03:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="端口映射-模拟VPN制作">
+<meta name="twitter:description" content="端口映射简介百度百科：端口映射是NAT的一种，功能是把在公网的地址转翻译成私有地址， 采用路由方式的ADSL宽带路由器拥有一个动态或固定的公网IP，ADSL直接接在HUB或交换机上，所有的电脑共享上网。 端口映射转发区别转发与映射，按理解意思，是用不同的方法实现同样的目标。 端口转发：你给我了，我打开看看，发现这上面标志显示是要给张三，那么我就给张三去。如果标志是给李四，那我就再给李四去。 端口映">
+<meta name="twitter:image" content="https://i.imgur.com/AeFotL9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/20/端口映射/"/>
+
+
+
+
+
+  <title>端口映射-模拟VPN制作 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/20/端口映射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">端口映射-模拟VPN制作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-20T00:00:00+08:00">
+                2018-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="端口映射简介"><a href="#端口映射简介" class="headerlink" title="端口映射简介"></a>端口映射简介</h1><p>百度百科：端口映射是NAT的一种，功能是把在公网的地址转翻译成私有地址， 采用路由方式的ADSL宽带路由器拥有一个动态或固定的公网IP，ADSL直接接在HUB或交换机上，所有的电脑共享上网。</p>
+<h1 id="端口映射转发区别"><a href="#端口映射转发区别" class="headerlink" title="端口映射转发区别"></a>端口映射转发区别</h1><p>转发与映射，按理解意思，是用不同的方法实现同样的目标。</p>
+<p>端口转发：你给我了，我打开看看，发现这上面标志显示是要给张三，那么我就给张三去。如果标志是给李四，那我就再给李四去。</p>
+<p>端口映射：你放到我左手，我就直接给张三；你放到我右手，我就直接给李四。这中间我不管你放我手上的是什么东西。</p>
+<p>转发的重点在“转”上面。送快递的过来，把所有快递都交给门口保安，保安再根据每件快递上的收件人来分发。映射，就是在大门口给每个人装个柜子，送快递的直接按收件人名字，把快递放到对应的柜子里面。</p>
+<p>区别不大，实例中在慢慢理解吧!</p>
+<h1 id="端口映射的形象理解"><a href="#端口映射的形象理解" class="headerlink" title="端口映射的形象理解"></a>端口映射的形象理解</h1><p>端口映射就类似一个中转站，三个人，第一个人要找第三个人传递信息必须告诉第二个人，然后第二个人转告第三个人。就字面意思–端口转发。有些时候还有一些妙用，比如网站藏匿端口，访问公网ip:8888端口，映射为内网端口的8080。</p>
+<p>想实现访问公司局域网服务器，IP地址是172.16.1.215，如果我们出差在外，使用的电脑IP地址是192.168.10.215，怎么样去访问局域网服务器的地址172.16.1.215呢;</p>
+<p>此时，我们可以登录局域网服务器所在的路由器，可以通过ipconfig获取网关地址，知道网关后登录到路由器后台，设置端口映射，将内部端口、外部端口设置为3737，内部IP设置为172.16.1.215，个人使用的电脑运行mstsc命令，在窗口中输入公司申请的公网IP+3737，就可以直接访问局域网服务器；</p>
+<h1 id="端口映射与VPN"><a href="#端口映射与VPN" class="headerlink" title="端口映射与VPN"></a>端口映射与VPN</h1><p>端口映射与VPN 目标都是为了从外网访问局域网内网，端口映射和VPN都可以实现远程控制访问</p>
+<p>相同点：端口映射和VPN都可以实现通过外网访问内网。<br>不同点：端口映射将端口暴露在公网中，使用nmap等端口扫描器可扫描，且端口映射数据没有进行加密处理，容易被截取并分析，对系统服务器以及网络安全造成威胁。<br>而VPN 只有通过VPN创建用户，服务器那边的授权，客户端才能进行正常访问，安全性相对较高。</p>
+<p>端口映射相对简单，VPN安全性更高</p>
+<h1 id="VM端口映射"><a href="#VM端口映射" class="headerlink" title="VM端口映射"></a>VM端口映射</h1><p>实例走一下 ，内外网的互通吧。</p>
+<p>前言，要保证VM是nat连接。</p>
+<p>1.打开VM左上角编辑，打开虚拟网络设置。</p>
+<p><img src="https://i.imgur.com/AeFotL9.png" alt=""></p>
+<p>2.NAT设置如图</p>
+<p><img src="http://a1.qpic.cn/psb?/V14K5DCn3C6bNV/a7CmzXwK.VzLn.PLqbiCxupZX2A9JP1ZTImErjpYzVo!/b/dFQBAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=*AEVAgAAAAADF9g!&amp;tl=1&amp;vuin=275640346&amp;tm=1542718800&amp;sce=60-2-2&amp;rf=viewer_4" alt=""></p>
+<p>3.windows设置出站入站规则</p>
+<p><img src="https://i.imgur.com/GQUFxRM.png" alt=""></p>
+<p>入站规则，是别人访问自己的端口规则，设置80端口开放，别人就可以访问自己的IP的80端口，而出站规则是自己访问其他网站的端口，测试发现出站规则没看到80端口却可以访问80端口，dl说访问别人端口可能是用类似50000端口去访问别人的80端口，所以我们要访问别人10000端口的时候未必要设置出战规则端口10000。dl说看下tcp三次握手了解下。</p>
+<p>4.测试结果</p>
+<p>使用虚拟机 nc -lvvp 8888</p>
+<p>访问物理机的6666端口即可转发到虚拟机的8888端口，记得设置入站规则6666端口，保证端口开放！先扫描下物理机6666端口。</p>
+<p><img src="http://a2.qpic.cn/psb?/V14K5DCn3C6bNV/WdG3p4i1GW11StpHM5bXD2iBwfvG.vKyQ*LKv1yfKdI!/b/dDEBAAAAAAAA&amp;ek=1&amp;kp=1&amp;pt=0&amp;bo=kAJEAQAAAAADJ9U!&amp;tl=1&amp;vuin=275640346&amp;tm=1542718800&amp;sce=60-2-2&amp;rf=viewer_4" alt=""></p>
+<p>可以看到 监听的6666端口在访问物理机的8888端口的时候成功捕捉到。<br>由物理机6666端口映射到虚拟机的8888端口！<br><img src="http://m.qpic.cn/psb?/V14K5DCn3C6bNV/GTh0remJT0I9c8pOWtfKZd9h*i8O9Rh*Ga3fx**WDmw!/b/dDYBAAAAAAAA&amp;bo=ZAROAQAAAAADBw0!&amp;rf=viewer_4" alt=""></p>
+<p>一篇VM 很详细的参考文章：<a href="https://blog.csdn.net/BokeyGeGe/article/details/78631328" target="_blank" rel="noopener">https://blog.csdn.net/BokeyGeGe/article/details/78631328</a></p>
+<h1 id="ssh隧道-重点"><a href="#ssh隧道-重点" class="headerlink" title="ssh隧道(重点)"></a>ssh隧道(重点)</h1><p>SSH会自动加密和解密所有SSH客户端与服务端之间的网络数据。但是，SSH还能够将其他TCP端口的网络数据通SSH链接来转发，并且自动提供了相应的加密及解密服务。这一过程也被叫做”隧道”（tunneling）。</p>
+<p>这是因为SSH为其他TCP链接提供了一个安全的通道来进行传输而得名。例如，Telnet ，SMTP ，LDAP这些TCP应用均能够从中得益，避免了用户名，密码以及隐私信息的明文传输。而与此同时，如果工作环境许中的防火墙限制了一些网络端口的使用，但是允许SSH的连接，也能够将通过将TCP用端口转发来使用SSH进行通讯。</p>
+<p>下面的VPN制作就用到了ssh隧道技术。</p>
+<h1 id="VM虚拟机模拟VPN翻墙—正向代理"><a href="#VM虚拟机模拟VPN翻墙—正向代理" class="headerlink" title="VM虚拟机模拟VPN翻墙—正向代理"></a>VM虚拟机模拟VPN翻墙—正向代理</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>有三个机器，我们在第一台机器连接第二台机器ssh从而转发端口访问第三台机器。<br>在第一台连接第二台的ssh</p>
+<h2 id="第一次失败实验"><a href="#第一次失败实验" class="headerlink" title="第一次失败实验"></a>第一次失败实验</h2><p>前言：想测试下 三个内网IP 模拟谷歌翻墙，结果发现了点问题记录下!</p>
+<pre><code>win10 target 1   192.168.100.219
+linux target 2   192.168.189.129
+linux target 3   192.168.189.131
+</code></pre><p>打算模拟谷歌翻墙，首先打开两台linux 80 服务，</p>
+<p><img src="https://i.imgur.com/LdlCmCJ.png" alt=""></p>
+<p><img src="https://i.imgur.com/KDkfcmW.png" alt=""></p>
+<p>谷歌翻墙模拟，win10是一台国内被墙拦截的主机，</p>
+<p>linux 2 是一台墙外的一台服务器，可以访问谷歌。</p>
+<p>linux 3 是要访问的服务器。在此代表谷歌。</p>
+<p>第一步：先将win10 IP封禁。</p>
+<p>这里遇到第一个问题，可以看到三个IP 不是全部在同一个IP段，如果 2号 和 3 号互相访问，他们在同一个IP段会直接访问，这里，3号禁止2号IP，可以禁止2号访问，但是3号和1号不在同一个IP段，且物理机与虚拟机之间网路通信貌似还要端口转发之类的或者是直接走物理网卡，反正就是禁了也会被绕过，保证三台服务器在同一个IP段下。全部换成桥接模式，接下来从新测试。</p>
+<h2 id="第二次模拟VPN制作"><a href="#第二次模拟VPN制作" class="headerlink" title="第二次模拟VPN制作"></a>第二次模拟VPN制作</h2><p>从新开始！</p>
+<p>这里虚拟机换成桥接模式。</p>
+<p>重启网络服务  service network restart //更换网络模式要重启网络！</p>
+<pre><code>linux target 1   192.168.100.194
+linux target 2   192.168.100.110
+linux target 3   192.168.100.176
+</code></pre><p>#第一步 </p>
+<p>服务器3号封禁 linux 1 IP </p>
+<p>iptables -I INPUT -s 192.168.100.160 -j DROP //将linux1的包请求全部丢弃，访问停留几十秒最后无法访问。</p>
+<p>iptables -A INPUT -s 192.168.100.194 -j REJECT   //封禁IP</p>
+<p>iptables -I INPUT -s 192.168.100.219 -p tcp –dport 80 -j ACCEPT 解除限制</p>
+<p>清空封掉的IP地址，可以输入：iptables –flush</p>
+<p>而 2号服务器是可以正常访问 3号模拟谷歌服务器</p>
+<p>这里我们已经禁了一号服务器，一号服务器来访问下三号服务器。</p>
+<p><img src="https://i.imgur.com/8iBLnWK.png" alt=""></p>
+<p>可以看到一号服务器已无法访问 三号谷歌服务器。</p>
+<p>#第二步<br>端口转发</p>
+<p>首先查看自己开启的端口</p>
+<p><img src="https://i.imgur.com/rO0dudJ.png" alt=""></p>
+<p>我们选择一个端口1080端口建立动态转发的隧道，</p>
+<p>第一台服务器下的命令：ssh -D 1080 -fN 192.168.100.110//这里我们ssh连接第二台服务器，本地1080端口转发。相当于第二台服务器是一个跳板。</p>
+<p>命令注释：</p>
+<pre><code>选项：-f 后台启用
+-N 不打开远程shell，处于等待状态（不加-N则直接登录进去）
+-g 启用网关功能
+</code></pre><p>输入密码后登陆成功，在后台运行只是加入了一个进程。</p>
+<p>此时访问 服务器3依然是不成功的。</p>
+<p>设置代理服务器1访问服务器3，命令如下（在服务器1上输入）：</p>
+<pre><code>curl --socks5 127.0.0.1:1080 http://192.168.100.176
+</code></pre><p><img src="https://i.imgur.com/aOF4pLm.png" alt=""></p>
+<p>可以看到已经访问到第三台模拟谷歌浏览器</p>
+<p>#第三步</p>
+<p>浏览器设置代理1080端口就可以浏览器便捷的进行访问</p>
+<p><img src="https://i.imgur.com/EOJ4wuA.png" alt=""><br>代理前</p>
+<p><img src="https://i.imgur.com/LwrLisM.png" alt=""></p>
+<p>代理后，成功访问</p>
+<p><img src="https://i.imgur.com/7F4R3mg.png" alt=""></p>
+<p>如果有大陆以外的服务器，那么便可以自己制作VPN翻墙。简单使用！</p>
+<h1 id="利用跳板转发端口"><a href="#利用跳板转发端口" class="headerlink" title="利用跳板转发端口"></a>利用跳板转发端口</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>有三个机器，我们在第二台跳板机器执行命令，从而使得一号和三号机器可以互相访问。</p>
+<p>连接模式：桥接</p>
+<pre><code>linux target 1   192.168.100.110
+linux target 2   192.168.100.194
+linux target 3   192.168.100.176
+</code></pre><p>首先，我们先模拟环境，用三号服务器封禁一号服务器的IP，</p>
+<p>root@kali:~# iptables -A INPUT -s 192.168.100.110 -j REJECT//禁止IP访问任意端口</p>
+<p><img src="https://i.imgur.com/BbcqoB2.png" alt=""></p>
+<p>可以看到禁止192.168.100.110IP访问本机的任意端口</p>
+<p>我们使用三号服务器nc监听23端口。一号已经连接不到三号的23端口。二号服务器可以连接三号服务器23端口。环境搭建完毕。</p>
+<p>root@kali:~# nc -lvvp 23</p>
+<p>未完待续！</p>
+<p>然后在第二台主机输入命令 </p>
+<p>ssh -R 9527:192.168.100.176:23 -fN 192.168.100.110</p>
+<p>然后我们在 第一台服务器上执行 telnet 127.0.0.1 9527即可访问。</p>
+<p>可以看到nc监听的第三台机器 </p>
+<p><img src="https://i.imgur.com/qEMogZh.png" alt=""></p>
+<p>可以看到数据是从192.168.100.194（第三台主机）转发过来的</p>
+<p>设置VPN   </p>
+<p>在第二台主机输入命令 </p>
+<p>ssh -R 1080:192.168.100.176:80 -fN 192.168.100.110</p>
+<p>然后我们在 第一台服务器上执行 telnet 127.0.0.1 1080即可访问。</p>
+<p><img src="https://i.imgur.com/xYT2eMJ.png" alt=""></p>
+<p>可以正常访问网页了。<br>浏览器设置代理。</p>
+<hr>
+<p>参考：<a href="https://www.cnblogs.com/phpdragon/p/5314650.html" target="_blank" rel="noopener">https://www.cnblogs.com/phpdragon/p/5314650.html</a><br>参考：<a href="https://www.cnblogs.com/keerya/p/7612715.html" target="_blank" rel="noopener">https://www.cnblogs.com/keerya/p/7612715.html</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/杂/" rel="tag"># 杂</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/18/phpmyadmin拿shell/" rel="next" title="phpmyadmin两种拿shell">
+                <i class="fa fa-chevron-left"></i> phpmyadmin两种拿shell
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/25/正反向代理/" rel="prev" title="正反向代理">
+                正反向代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#端口映射简介"><span class="nav-number">1.</span> <span class="nav-text">端口映射简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口映射转发区别"><span class="nav-number">2.</span> <span class="nav-text">端口映射转发区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口映射的形象理解"><span class="nav-number">3.</span> <span class="nav-text">端口映射的形象理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口映射与VPN"><span class="nav-number">4.</span> <span class="nav-text">端口映射与VPN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VM端口映射"><span class="nav-number">5.</span> <span class="nav-text">VM端口映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ssh隧道-重点"><span class="nav-number">6.</span> <span class="nav-text">ssh隧道(重点)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VM虚拟机模拟VPN翻墙—正向代理"><span class="nav-number">7.</span> <span class="nav-text">VM虚拟机模拟VPN翻墙—正向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">7.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一次失败实验"><span class="nav-number">7.2.</span> <span class="nav-text">第一次失败实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二次模拟VPN制作"><span class="nav-number">7.3.</span> <span class="nav-text">第二次模拟VPN制作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用跳板转发端口"><span class="nav-number">8.</span> <span class="nav-text">利用跳板转发端口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理-1"><span class="nav-number">8.1.</span> <span class="nav-text">原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

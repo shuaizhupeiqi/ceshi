@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#python爬虫基础 python requests常用库文章链接 python2.x与3.xurllib库在python2与python3中的区别 Urllib是python提供的一个用于操作url的模块。 在python2中，有urllib库和urllib2库。在python3中，urllib2合并到urllib库中,我们爬取网页的时候，经常用到这个库。 升级合并后，模块中包的位置变化的地方">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爬虫基础">
+<meta property="og:url" content="http://yoursite.com/2018/08/31/爬虫基础/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="#python爬虫基础 python requests常用库文章链接 python2.x与3.xurllib库在python2与python3中的区别 Urllib是python提供的一个用于操作url的模块。 在python2中，有urllib库和urllib2库。在python3中，urllib2合并到urllib库中,我们爬取网页的时候，经常用到这个库。 升级合并后，模块中包的位置变化的地方">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://qiniu.cuiqingcai.com/wp-content/uploads/2015/02/2015-02-13-000909-%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<meta property="og:image" content="http://thyrsi.com/t6/366/1536031874x-1922733639.png">
+<meta property="og:updated_time" content="2019-05-30T02:26:53.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爬虫基础">
+<meta name="twitter:description" content="#python爬虫基础 python requests常用库文章链接 python2.x与3.xurllib库在python2与python3中的区别 Urllib是python提供的一个用于操作url的模块。 在python2中，有urllib库和urllib2库。在python3中，urllib2合并到urllib库中,我们爬取网页的时候，经常用到这个库。 升级合并后，模块中包的位置变化的地方">
+<meta name="twitter:image" content="http://qiniu.cuiqingcai.com/wp-content/uploads/2015/02/2015-02-13-000909-%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/31/爬虫基础/"/>
+
+
+
+
+
+  <title>爬虫基础 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/31/爬虫基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">爬虫基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-31T20:54:07+08:00">
+                2018-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#python爬虫基础</p>
+<h1 id="python-requests常用库"><a href="#python-requests常用库" class="headerlink" title="python requests常用库"></a>python requests常用库</h1><p><a href="https://www.cnblogs.com/lilinwei340/p/6417689.html" target="_blank" rel="noopener">文章链接</a></p>
+<h1 id="python2-x与3-x"><a href="#python2-x与3-x" class="headerlink" title="python2.x与3.x"></a>python2.x与3.x</h1><p>urllib库在python2与python3中的区别</p>
+<p>Urllib是python提供的一个用于操作url的模块。</p>
+<p>在python2中，有urllib库和urllib2库。在python3中，urllib2合并到urllib库中,我们爬取网页的时候，经常用到这个库。</p>
+<p>升级合并后，模块中包的位置变化的地方较多。</p>
+<p>以下是python2与python3中常用的关于urllib库的变化：</p>
+<p>1.在python2中使用import urllib2————对应的，在python3中会使用import urllib.request,urllib.error</p>
+<p>2.在python2中使用import urllib————对应的，在python3中会使用import urllib.request,urllib.error,urllib.parse</p>
+<p>3.在python2中使用import urlparse————对应的，在python3中会使用import urllib.parse</p>
+<p>4.在python2中使用urllib2.urlopen————对应的，在python3中会使用urllib.request.urlopen</p>
+<p>5.在python2中使用urllib.urlencode————对应的，在python3中会使用urllib.parse.urlencode</p>
+<p>6.在python2中使用urllib.quote————对应的，在python3中会使用urllib.request.quote</p>
+<p>7.在python2中使用cookielib.CookieJar————对应的，在python3中会使用http.CookieJar</p>
+<p>8.在python2中使用urllib2.Request————对应的，在python3中会使用urllib.request.Request  </p>
+<p>9.cookielib 用 http.cookiejar 代替</p>
+<p>10.print “ “  用 print(“ “) 代替</p>
+<p>11.urllib2.URLError 用 urllib.error.URLError 代替</p>
+<p>12.urllib2.HTTPError 用 urllib.error.HTTPError 代替</p>
+<p>13.except urllib2.URLError, e:  用  except urllib.error.URLError as e: 代替</p>
+<p>14.response.text返回的是Unicode类型的数据，<br>   response.content返回的是buyes型也就是二进制的数据</p>
+<p>参考：<a href="https://www.cnblogs.com/dplearning/p/4854746.html" target="_blank" rel="noopener">文章</a></p>
+<h1 id="简单测试爬行"><a href="#简单测试爬行" class="headerlink" title="简单测试爬行"></a>简单测试爬行</h1><pre><code>from urllib.request import urlopen
+response = urlopen(&quot;http://www.baidu.com&quot;)
+a=response.read()
+print(a)//3.x版本print已经是一个函数，所以需要加括号
+</code></pre><p>上述代码就可轻松爬行出baidu的网页源码</p>
+<p><img src="http://qiniu.cuiqingcai.com/wp-content/uploads/2015/02/2015-02-13-000909-%E7%9A%84%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" alt=""></p>
+<p>首先我们调用的是urllib2库里面的urlopen方法，传入一个URL,urlopen函数是有三个参数的，urlopen(url,data,timeout)<br>url为需要打开的网址<br>data为要传输的数据如post或者get参数<br>timeout延迟设置</p>
+<h1 id="headers设置模拟浏览器"><a href="#headers设置模拟浏览器" class="headerlink" title="headers设置模拟浏览器"></a>headers设置模拟浏览器</h1><ol>
+<li><p>有些网站不会同意程序直接用上面的方式进行访问，如果识别有问题，那么站点根本不会响应，所以为了完全模拟浏览器的工作，我们需要设置一些Headers 的属性，agent就是请求的身份，如果没有写入请求身份，那么服务器不一定会响应，所以可以在headers中设置agent。<br>防盗链的时候服务器会识别headers中的refer是不是它自己，如果不是，服务器不会响应，所以我们需要在headers加入refer。例：  </p>
+<pre><code>headers = { &apos;User-Agent&apos; : &apos;Mozilla/4.0 (compatible; MSIE 5.5;  
+ Windows NT)&apos;,&apos;Referer&apos;:&apos;http://www.zhihu.com/articles&apos; }  
+</code></pre></li>
+</ol>
+<h1 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h1><ol start="2">
+<li><p>假如一个网站它会检测某一段时间某个IP 的访问次数，如果访问次数过多，它会禁止你的访问。所以你可以设置一些代理服务器来帮助你做工作，每隔一段时间换一个代理。代码如：  </p>
+<pre><code>import urllib2  
+ enable_proxy = True  
+proxy_handler = urllib2.ProxyHandler({&quot;http&quot; : &apos;http://some-  proxy.com:8080&apos;})  
+null_proxy_handler = urllib2.ProxyHandler({})
+if enable_proxy:  
+opener = urllib2.build_opener(proxy_handler)  
+else:  
+opener = urllib2.build_opener(null_proxy_handler)  
+urllib2.install_opener(opener)  
+</code></pre></li>
+</ol>
+<h1 id="timeout延迟"><a href="#timeout延迟" class="headerlink" title="timeout延迟"></a>timeout延迟</h1><ol start="3">
+<li><p>有些网站等待超时，为了解决一些网站实在响应过慢而造成的影响，用到timeout参数</p>
+<pre><code>import urllib2
+
+response = urllib2.urlopen(&apos;http://www.baidu.com&apos;, timeout=10)
+</code></pre></li>
+</ol>
+<h1 id="python字符串str和字节数组相互转化方法"><a href="#python字符串str和字节数组相互转化方法" class="headerlink" title="python字符串str和字节数组相互转化方法"></a>python字符串str和字节数组相互转化方法</h1><pre><code># bytes object 
+b = b&quot;example&quot;
+
+# str object 
+s = &quot;example&quot;
+
+# str to bytes 
+bytes(s, encoding = &quot;utf8&quot;) 
+
+# bytes to str 
+str(b, encoding = &quot;utf-8&quot;) 
+
+# an alternative method 
+# str to bytes 
+str.encode(s) 
+
+# bytes to str 
+bytes.decode(b)
+</code></pre><h1 id="爬行糗事百科"><a href="#爬行糗事百科" class="headerlink" title="爬行糗事百科"></a>爬行糗事百科</h1><p>贴脚本：</p>
+<pre><code>#coding:utf-8
+import requests
+import base64
+import re
+url=&apos;https://www.qiushibaike.com/&apos;
+s=requests.Session()
+r=s.get(url)
+b=r.text
+b=re.findall(r&apos;(&lt;div class=&quot;content&quot;&gt;([\s\S])&lt;span&gt;([\s\S]){3}.*([\s\S]){2}&lt;/span&gt;)+([\s\S])&apos;,b)
+#b =&apos;&apos;.join(b)
+#a=matchaaa.replace(&quot; &quot;,&quot; &quot;)
+f=open(&apos;1.txt&apos;)
+#b=matchaaa
+b=f.read()
+b=b.replace(&quot;&lt;span&gt;&quot;,&quot; &quot;)
+b=b.replace(&apos;&lt;div class=&quot;content&quot;&gt;&apos;,&quot; &quot;)
+b=b.replace(&quot;&lt;/span&gt;&quot;,&quot; &quot;)
+b=b.replace(&quot;&apos;\\n&apos;&quot;,&quot; &quot;)
+b=b.replace(&quot;\\n&quot;,&quot; &quot;)
+if b:
+    print(b)
+</code></pre><p>#备注解析<br>1.正则的search()函数，这个函数可以找到一个匹配的字符串返回，但是想找到所有匹配的字符串返回，需要使用findall，findall函数返回的总是正则表达式在字符串中所有匹配结果的列表，此处主要讨论列表中“结果”的展现方式，即findall中返回列表中每个元素包含的信息。因为返回形式为数组所以后面replace格式出了某些问题暂不明。<br>2.b=r.text 或者 b=r.content.decode()都可 格式class str<br>3.这里直接将抓取的b去replace报错，不明白为啥欢迎大牛指出，所以保存了一个文件中再读取，格式就正确。<br>4.\n 正则那里需要转义一个\<br>5.爬虫最好用beautiful soup，本文只是为了练习正则等python用法。<br>结果如下:  </p>
+<h1 id="爬取百度"><a href="#爬取百度" class="headerlink" title="爬取百度"></a>爬取百度</h1><pre><code>#coding:utf-8
+import requests
+import base64
+import re
+from bs4 import BeautifulSoup#爬虫常用模块
+import lxml
+headers = {
+    &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&apos;,
+    &apos;Accept-Encoding&apos;: &apos;gzip, deflate, compress&apos;,
+    &apos;Accept-Language&apos;: &apos;en-us;q=0.5,en;q=0.3&apos;,
+    &apos;Cache-Control&apos;: &apos;max-age=0&apos;,
+        &apos;Connection&apos;: &apos;keep-alive&apos;,
+    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:22.0) Gecko/20100101 Firefox/22.0&apos;
+}
+str=raw_input(&quot;请输入你要查找的关键字：&quot;)#输入查找的关键字
+pn=raw_input(&quot;请输入你要爬取的页数：&quot;)#输入需要爬行几页
+pnn=int(pn)
+for i in  range(0,pnn):
+    pn = int(i) * 10
+    pn = bytes(pn)
+    url=&apos;https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;tn=monline_4_dg&amp;wd=&apos;+str+&apos;&amp;oq=fdsfs&amp;rsv_pq=a3b95bf10006369b&amp;rsv_t=f84emHqbAsRGwITxX0xpSE8jCnNkrSbFv%2FO0WK9oEnD2ya1fJl1gCKe5peQZFBklaWQB&amp;rqlang=cn&amp;rsv_enter=1&amp;rsv_sug3=13&amp;rsv_sug1=12&amp;rsv_sug7=100&amp;bs=fdsfs&amp;pn=&apos;+pn
+    r=requests.get(url,headers=headers)#模拟客户端传递参数
+    b=r.content
+    b=&quot;&quot;.join(b) #让列表形式的type转化为str字符串这样才可以用replace
+    soup = BeautifulSoup(b,&quot;lxml&quot;)
+    tagh3 = soup.find_all(&apos;h3&apos;)
+    for h3 in tagh3:
+        href = h3.find(&apos;a&apos;).get(&apos;href&apos;)
+        baidu_url = requests.get(url=href, headers=headers, allow_redirects=False)
+        real_url = baidu_url.headers[&apos;Location&apos;]  # 得到网页原始地址
+        with open(&apos;result/&apos;+str+&apos;.txt&apos;, &apos;a+&apos;) as f: #将文件以附加的方式写入搜索名字.txt文件中
+            f.write(real_url+&quot;\n&quot;)
+        print(real_url)
+</code></pre><p><img src="http://thyrsi.com/t6/366/1536031874x-1922733639.png" alt=""></p>
+<p>参考：<a href="https://cuiqingcai.com/954.html" target="_blank" rel="noopener">文章</a></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/31/python的web基础/" rel="next" title="python的web基础应用">
+                <i class="fa fa-chevron-left"></i> python的web基础应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/31/markdownpad基本使用/" rel="prev" title="markdownpad基本使用">
+                markdownpad基本使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-requests常用库"><span class="nav-number">1.</span> <span class="nav-text">python requests常用库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python2-x与3-x"><span class="nav-number">2.</span> <span class="nav-text">python2.x与3.x</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单测试爬行"><span class="nav-number">3.</span> <span class="nav-text">简单测试爬行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#headers设置模拟浏览器"><span class="nav-number">4.</span> <span class="nav-text">headers设置模拟浏览器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代理设置"><span class="nav-number">5.</span> <span class="nav-text">代理设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#timeout延迟"><span class="nav-number">6.</span> <span class="nav-text">timeout延迟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python字符串str和字节数组相互转化方法"><span class="nav-number">7.</span> <span class="nav-text">python字符串str和字节数组相互转化方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬行糗事百科"><span class="nav-number">8.</span> <span class="nav-text">爬行糗事百科</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爬取百度"><span class="nav-number">9.</span> <span class="nav-text">爬取百度</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

